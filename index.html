@@ -96,11 +96,11 @@
         }
 
         function moveButton(button) {
-            const container = button.parentElement;
-            const rect = container.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
 
-            const newLeft = Math.random() * (rect.width - button.offsetWidth);
-            const newTop = Math.random() * (rect.height - button.offsetHeight);
+            const newLeft = Math.random() * (viewportWidth - button.offsetWidth);
+            const newTop = Math.random() * (viewportHeight - button.offsetHeight);
 
             button.style.position = 'absolute';
             button.style.left = `${newLeft}px`;
