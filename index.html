@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: rgba(24, 150, 214, 0.14);
+            backdrop-filter: blur(5.5px);
+            -webkit-backdrop-filter: blur(5.5px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(24, 150, 214, 0.08);
+        }
+
+        .question {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .button.yes {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .button.no {
+            background-color: #dc3545;
+            color: white;
+            position: relative;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .popup h2 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question">How are you? Hope you are good! Be my girlfriend?</div>
+        <div class="buttons">
+            <button class="button yes" onclick="showPopup()">Yes</button>
+            <button class="button no" onmouseover="moveButton(this)">No</button>
+        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <h2>Congratulations!</h2>
+        <p>You are now in a relationship!</p>
+    </div>
+
+    <script>
+        function showPopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'block';
+        }
+
+        function moveButton(button) {
+            const container = button.parentElement;
+            const rect = container.getBoundingClientRect();
+
+            const newLeft = Math.random() * (rect.width - button.offsetWidth);
+            const newTop = Math.random() * (rect.height - button.offsetHeight);
+
+            button.style.position = 'absolute';
+            button.style.left = `${newLeft}px`;
+            button.style.top = `${newTop}px`;
+        }
+    </script>
+</body>
+</html>
