@@ -24,6 +24,7 @@
             border-radius: 16px;
             padding: 20px;
             border: 1px solid rgba(214, 24, 62, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
         .question {
@@ -63,7 +64,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 16px;
             padding: 20px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -76,20 +77,18 @@
 
         .love-effect {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            font-size: 1.5em;
             animation: float 4s infinite;
             pointer-events: none;
         }
 
         @keyframes float {
             0% {
-                transform: translate(-50%, -50%) scale(1);
+                transform: translate(0, 0) scale(1);
                 opacity: 1;
             }
             100% {
-                transform: translate(-50%, -200%) scale(0.5);
+                transform: translate(0, -200px) scale(0.5);
                 opacity: 0;
             }
         }
@@ -113,18 +112,15 @@
         <p>You are now in a relationship!</p>
     </div>
 
-    <div class="love-effect" id="loveEffect" style="display: none;">
-        ❤️
-    </div>
-
     <script>
         function askLove() {
             const nameInput = document.getElementById('nameInput').value.trim();
             if (nameInput) {
                 document.getElementById('question').textContent = `I love the queen ${nameInput}. Be my girlfriend?`;
+                document.getElementById('nameInput').style.display = 'none';
                 document.getElementById('nameButtons').style.display = 'none';
                 document.getElementById('loveButtons').style.display = 'flex';
-                showLoveEffect();
+                generateLoveEffects();
             } else {
                 alert('Please enter your name.');
             }
@@ -147,12 +143,22 @@
             button.style.top = `${newTop}px`;
         }
 
-        function showLoveEffect() {
-            const loveEffect = document.getElementById('loveEffect');
-            loveEffect.style.display = 'block';
-            setTimeout(() => {
-                loveEffect.style.display = 'none';
-            }, 4000);
+        function generateLoveEffects() {
+            for (let i = 0; i < 20; i++) {
+                const loveEffect = document.createElement('div');
+                loveEffect.className = 'love-effect';
+                loveEffect.textContent = '❤️';
+                loveEffect.style.left = `${Math.random() * window.innerWidth}px`;
+                loveEffect.style.top = `${Math.random() * window.innerHeight}px`;
+                loveEffect.style.position = 'absolute';
+                loveEffect.style.animationDelay = `${Math.random() * 2}s`;
+
+                document.body.appendChild(loveEffect);
+
+                setTimeout(() => {
+                    loveEffect.remove();
+                }, 4000);
+            }
         }
     </script>
 </body>
